@@ -18,8 +18,11 @@ macro_rules! ast_node {
             pub src: SourceLocation,
             $(
                 $(#[$field_meta])*
-                pub $field: $ty
-            ),*
+                pub $field: $ty,
+            )*
+
+            #[serde(flatten)]
+            pub other: std::collections::BTreeMap<String, serde_json::Value>,
         }
     };
 }
